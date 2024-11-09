@@ -2,107 +2,96 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommonLibrary;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UserApi.Data;
 using UserApi.Models;
+using UserApi.Repository.IRepository;
 
 namespace UserApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/UserApi")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly UserDBContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(UserDBContext context)
+        public UsersController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
+            new ResponseDTO();
         }
 
         // GET: api/Users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        [HttpGet("GetAllUsers")]
+        public async Task<ActionResult<ResponseDTO>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _userRepository.GetAllUsers(),
+            };
+
+            return Ok(response);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<ResponseDTO>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
 
-            if (user == null)
+            var response = new ResponseDTO()
             {
-                return NotFound();
-            }
+                IsSuccessful = true,
+                Result = await _userRepository.GetUser(id),
+            };
 
-            return user;
+            return Ok(response);
         }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut("UpdateUser")]
+        public async Task<ActionResult<ResponseDTO>> PutUser(User user)
         {
-            if (id != user.Id)
+            var response = new ResponseDTO()
             {
-                return BadRequest();
-            }
+                IsSuccessful = true,
+                Result = await _userRepository.PutUser(user),
+            };
 
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(response);
         }
 
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        [HttpPost("RegisterUser")]
+        public async Task<ActionResult<ResponseDTO>> PostUser(RegistrationRequestDTO registrationRequestDTO)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _userRepository.PostUser(registrationRequestDTO),
+            };
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return Ok(response);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<ActionResult<ResponseDTO>> DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var response = new ResponseDTO()
             {
-                return NotFound();
-            }
+                IsSuccessful = true,
+                Result = await _userRepository.DeleteUser(id),
+            };
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok(response);
         }
 
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
-        }
+        
     }
 }

@@ -40,6 +40,7 @@ namespace UserApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -49,6 +50,9 @@ namespace UserApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

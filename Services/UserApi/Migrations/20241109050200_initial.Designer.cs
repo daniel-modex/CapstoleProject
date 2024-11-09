@@ -12,8 +12,8 @@ using UserApi.Data;
 namespace UserApi.Migrations
 {
     [DbContext(typeof(UserDBContext))]
-    [Migration("20241108051217_newDbSet")]
-    partial class newDbSet
+    [Migration("20241109050200_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,13 +36,14 @@ namespace UserApi.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("DOB")
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -52,6 +53,9 @@ namespace UserApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

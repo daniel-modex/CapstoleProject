@@ -1,10 +1,5 @@
 
-using Microsoft.EntityFrameworkCore;
-using UserApi.Data;
-using UserApi.Repository;
-using UserApi.Repository.IRepository;
-
-namespace UserApi
+namespace GatewayApi
 {
     public class Program
     {
@@ -15,8 +10,6 @@ namespace UserApi
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddDbContext<UserDBContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultDB")));
-            builder.Services.AddTransient<IUserRepository,UserRepository>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

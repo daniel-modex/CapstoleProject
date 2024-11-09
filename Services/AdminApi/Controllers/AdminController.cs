@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace AdminApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Admin")]
     [ApiController]
     public class AdminController : ControllerBase
     {
@@ -18,17 +18,35 @@ namespace AdminApi.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        [HttpGet("Users")]
+        [HttpGet("GetAllUsers")]
         public async Task<ActionResult<ResponseDTO>> GetUsers()
         {
             var client = _httpClientFactory.CreateClient();
             var userApiURL = "https://localhost:7021/api/Users";
-            var response = await client.GetStringAsync(userApiURL);
+            var response = await client.GetAsync(userApiURL);
              
 
             ResponseDTO responseDTO = new()
             {
-                Result =  JsonConvert.DeserializeObject<List<UserDTO>>(response),
+                Result =  JsonConvert.DeserializeObject<List<UserDTO>>(await response.Content.ReadAsStringAsync()),
+                IsSuccessful = true
+            };
+
+            return Ok(responseDTO);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ResponseDTO>> DeleteUser(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var userApiURL = $"https://localhost:7021/api/Users/{id}";
+            var response = await client.DeleteAsync(userApiURL);
+
+            
+
+            ResponseDTO responseDTO = new()
+            {
+                Result = await response.Content.ReadAsStringAsync(),
                 IsSuccessful = true
             };
 
