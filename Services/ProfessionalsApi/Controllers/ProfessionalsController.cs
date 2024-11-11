@@ -1,0 +1,128 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using CommonLibrary;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProfessionalsApi.Data;
+using ProfessionalsApi.Models;
+using ProfessionalsApi.Repository.IRepository;
+
+namespace ProfessionalsApi.Controllers
+{
+    [Route("api/Services")]
+    [ApiController]
+    public class ProfessionalsController : ControllerBase
+    {
+        private readonly IProfessionalRepository _professionalRepository;
+
+        public ProfessionalsController(IProfessionalRepository professionalRepository)
+        {
+            _professionalRepository = professionalRepository;
+        }
+
+        // GET: api/Professionals
+        [HttpGet("GetAllProfessionals")]
+        public async Task<ActionResult<ResponseDTO>> GetProfessionals()
+        {
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _professionalRepository.GetAllProfessionals(),
+            };
+
+            return Ok(response);
+        }
+
+        // GET: api/Professionals/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ResponseDTO>> GetProfessionals(int id)
+        {
+            var professionals = await _professionalRepository.GetProfessional(id);
+
+            if (professionals == null)
+            {
+                return NotFound();
+            }
+
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = professionals,
+            };
+
+            return Ok(response);
+        }
+
+        // PUT: api/Professionals/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("updateProfile/{id}")]
+        public async Task<ActionResult<ResponseDTO>> PutProfessionals(int id,UpdateProfile updateProfile)
+        {
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _professionalRepository.PutProfessional(id,updateProfile),
+            };
+
+            return Ok(response);
+        }
+
+        // POST: api/Professionals
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("Register")]
+        public async Task<ActionResult<ResponseDTO>> PostProfessionals(RegistrationRequestDTO registrationRequest)
+        {
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _professionalRepository.PostProfessional(registrationRequest),
+            };
+
+            return Ok(response);
+        }
+
+        // DELETE: api/Professionals/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ResponseDTO>> DeleteProfessionals(int id)
+        {
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _professionalRepository.DeleteProfessional(id),
+            };
+
+            return Ok(response);
+        }
+
+
+
+        [HttpPut("ConfirmService")]
+        public async Task<ActionResult<ResponseDTO>> ConfirmService(int id, bool status, decimal rating)
+        {
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _professionalRepository.ConfirmResponse(id,status,rating),
+            };
+
+            return Ok(response);
+        }
+
+        [HttpPut("StatusChange")]
+        public async Task<ActionResult<ResponseDTO>> StatusChange(int id, bool status)
+        {
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _professionalRepository.ChangeStatus(id,status),
+            };
+
+            return Ok(response);
+        }
+
+       
+    }
+}

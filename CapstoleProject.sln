@@ -20,6 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminApi", "Services\AdminA
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfessionalsApi", "Services\ProfessionalsApi\ProfessionalsApi.csproj", "{17D85405-C7F1-4B91-B8D7-1C9AD1D13741}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D15F5BB6-4B31-41B2-8840-9D43669501B0} = {D15F5BB6-4B31-41B2-8840-9D43669501B0}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonLibrary", "Services\CommonLibrary\CommonLibrary.csproj", "{D15F5BB6-4B31-41B2-8840-9D43669501B0}"
 EndProject
