@@ -19,6 +19,7 @@ namespace ProfessionalsApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddTransient<IProfessionalRepository,ProfessionalRepository>();
+            builder.Services.AddTransient<IReviewRepository, ReviewRepository>();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();

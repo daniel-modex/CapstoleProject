@@ -6,7 +6,7 @@ namespace ProfessionalsApi.Repository.IRepository
     {
         Task<IEnumerable<Reviews>> GetReviewsByProfessional(string username);
         Task<Reviews> GetReviewById(int id);
-         
+        Task<bool> PostReview(Reviews review);
 
     }
 }

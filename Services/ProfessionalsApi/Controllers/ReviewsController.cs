@@ -2,107 +2,60 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommonLibrary;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProfessionalsApi.Data;
 using ProfessionalsApi.Models;
+using ProfessionalsApi.Repository.IRepository;
 
 namespace ProfessionalsApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/User/Reviews")]
     [ApiController]
     public class ReviewsController : ControllerBase
     {
-        private readonly ProfessionalApiContext _context;
+        private readonly IReviewRepository _reviewRepository;
 
-        public ReviewsController(ProfessionalApiContext context)
+        public ReviewsController(IReviewRepository reviewRepository)
         {
-            _context = context;
+            _reviewRepository = reviewRepository;
         }
 
-        // GET: api/Reviews
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reviews>>> GetReviews()
+        [HttpGet("ReviewById/{id}")]
+        public async Task<ActionResult<ResponseDTO>> ReviewById(int id)
         {
-            return await _context.Reviews.ToListAsync();
-        }
-
-        // GET: api/Reviews/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Reviews>> GetReviews(int id)
-        {
-            var reviews = await _context.Reviews.FindAsync(id);
-
-            if (reviews == null)
+            var response = new ResponseDTO()
             {
-                return NotFound();
-            }
-
-            return reviews;
+                IsSuccessful = true,
+                Result = await _reviewRepository.GetReviewById(id),
+            };
+            return Ok(response);
         }
 
-        // PUT: api/Reviews/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutReviews(int id, Reviews reviews)
+        [HttpGet("GetReviewsByName")]
+        public async Task<ActionResult<ResponseDTO>> GetReviews(string username)
         {
-            if (id != reviews.Id)
+            var response = new ResponseDTO()
             {
-                return BadRequest();
-            }
-
-            _context.Entry(reviews).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ReviewsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+                IsSuccessful = true,
+                Result = await _reviewRepository.GetReviewsByProfessional(username),
+            };
+            return Ok(response);
         }
 
-        // POST: api/Reviews
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Reviews>> PostReviews(Reviews reviews)
+        [HttpPost("AddReview")]
+        public async Task<ActionResult<ResponseDTO>> AddReview(Reviews reviews)
         {
-            _context.Reviews.Add(reviews);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetReviews", new { id = reviews.Id }, reviews);
-        }
-
-        // DELETE: api/Reviews/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReviews(int id)
-        {
-            var reviews = await _context.Reviews.FindAsync(id);
-            if (reviews == null)
+            var response = new ResponseDTO()
             {
-                return NotFound();
-            }
-
-            _context.Reviews.Remove(reviews);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+                IsSuccessful = true,
+                Result = await _reviewRepository.PostReview(reviews),
+            };
+            return Ok(response);
         }
 
-        private bool ReviewsExists(int id)
-        {
-            return _context.Reviews.Any(e => e.Id == id);
-        }
+
     }
 }
