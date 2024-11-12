@@ -36,6 +36,8 @@ namespace ProfessionalsApi.Repository
             {
                 pro.IsConfirmed = confirmResponse;
                 pro.Rating = rating;
+                pro.TotalReviews = 1;
+                pro.CummilativeRating = rating;
                 await _context.SaveChangesAsync();
                 return true;
             }

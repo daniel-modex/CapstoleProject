@@ -16,10 +16,12 @@ namespace ProfessionalsApi.Models
         public string? UserName { get; set; }
         public decimal Rating { get; set; } = 0;
         public bool IsAvailable { get; set; }=false;
-        public decimal BasePay { get; set; }
+        public decimal BasePay { get; set; } = 0;
         public bool IsConfirmed { get; set; } = false;
         public string? Domain { get; set; }
         public string? DocumentPath { get; set; }=string.Empty;
-       
+        public decimal CummilativeRating { get; set; } = 0;
+        public int TotalReviews { get; set; } = 0;
+
     }
 }

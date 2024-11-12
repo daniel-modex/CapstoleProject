@@ -35,12 +35,18 @@ namespace ProfessionalsApi.Repository
         {
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
-            var count = await _context.Reviews.Where(x=>x.ProfessionalName==review.ProfessionalName).CountAsync();
-            var oldRating = await _context.Professionals.FirstOrDefaultAsync(x=>x.UserName == review.ProfessionalName); 
-            var newRating = (oldRating.Rating+review.UserRating)/count;
-            oldRating.Rating = newRating;
-            await _context.SaveChangesAsync();
-            return true;
+            var oldRating = await _context.Professionals.FirstOrDefaultAsync(x=>x.UserName == review.ProfessionalName);
+            if (oldRating != null)
+            {
+                oldRating.TotalReviews++;
+                oldRating.CummilativeRating = oldRating.CummilativeRating + review.UserRating;
+                var newRating = oldRating.CummilativeRating / oldRating.TotalReviews;
+                oldRating.Rating = newRating;
+                
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
     }
 }

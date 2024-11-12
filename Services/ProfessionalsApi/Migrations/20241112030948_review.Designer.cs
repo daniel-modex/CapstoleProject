@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProfessionalsApi.Data;
 
@@ -11,9 +12,11 @@ using ProfessionalsApi.Data;
 namespace ProfessionalsApi.Migrations
 {
     [DbContext(typeof(ProfessionalApiContext))]
-    partial class ProfessionalApiContextModelSnapshot : ModelSnapshot
+    [Migration("20241112030948_review")]
+    partial class review
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
