@@ -73,6 +73,11 @@ namespace ProfessionalsApi.Repository
             return pro;
         }
 
+        public async Task<IEnumerable<Professionals>> GetProfessionalsByDomain(string domain)
+        {
+            return await _context.Professionals.Where(x=>x.Domain==domain).ToListAsync();
+        }
+
         public async Task<bool> PostProfessional(RegistrationRequestDTO registrationRequestDTO)
         {
             var pro = new Professionals()

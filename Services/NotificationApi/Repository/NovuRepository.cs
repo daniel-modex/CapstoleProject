@@ -12,7 +12,7 @@ namespace NotificationApi.Repository
     {
         private readonly HttpClient _httpClient;
         private const string NovuApiUrl = "https://api.novu.co/v1/events/trigger";
-        private const string NovuApiKey = "9aaebc3f3305d038856b75e525a267bb"; // Your Novu API Key
+        private const string NovuApiKey = "9aaebc3f3305d038856b75e525a267bb"; 
 
         // Constructor injects HttpClient
         public NovuService(HttpClient httpClient)
@@ -38,7 +38,7 @@ namespace NotificationApi.Repository
                     userImage = "https://react-email-demo-48zvx380u-resend.vercel.app/static/vercel-user.png",
                     arrowImage = "https://react-email-demo-bdj5iju9r-resend.vercel.app/static/vercel-arrow.png"
                 },
-                bridgeUrl = "https://5adb7dd7-e385-4f22-be5f-a1cfeea75a72.novu.sh/api/novu" // Optional bridge URL
+               bridgeUrl = "https://5adb7dd7-e385-4f22-be5f-a1cfeea75a72.novu.sh/api/novu" 
             };
 
             // Create HTTP request message

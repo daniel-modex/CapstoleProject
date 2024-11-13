@@ -37,10 +37,29 @@ namespace ProfessionalsApi.Controllers
         }
 
         // GET: api/Professionals/5
-        [HttpGet("{id}")]
+        [HttpGet("GetProfessional/{id}")]
         public async Task<ActionResult<ResponseDTO>> GetProfessionals(int id)
         {
             var professionals = await _professionalRepository.GetProfessional(id);
+
+            if (professionals == null)
+            {
+                return NotFound();
+            }
+
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = professionals,
+            };
+
+            return Ok(response);
+        }
+
+        [HttpGet("GetProfessionalsByDomain/{domain}")]
+        public async Task<ActionResult<ResponseDTO>> GetProfessionalsByDomain(string domain)
+        {
+            var professionals = await _professionalRepository.GetProfessionalsByDomain(domain);
 
             if (professionals == null)
             {

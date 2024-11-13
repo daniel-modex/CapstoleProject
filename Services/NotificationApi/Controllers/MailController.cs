@@ -35,7 +35,7 @@ namespace NotificationApi.Controllers
     {
         public string SubscriberId { get; set; }
         public string Email { get; set; }
-        public string phone { get; set; }
+        public string? phone { get; set; }
     }
 
 }

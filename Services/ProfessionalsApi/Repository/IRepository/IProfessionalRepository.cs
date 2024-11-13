@@ -11,6 +11,7 @@ namespace ProfessionalsApi.Repository.IRepository
         Task<bool> ConfirmResponse(int id, bool confirmResponse, decimal rating);
         Task<bool> DeleteProfessional(int id);
         Task<IEnumerable<Professionals>> GetAllProfessionals();
+        Task<IEnumerable<Professionals>> GetProfessionalsByDomain(string domain);
         Task<Professionals> GetProfessional(int id);
     }
 }
