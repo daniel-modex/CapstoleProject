@@ -25,7 +25,7 @@ namespace UserApi.Controllers
         }
 
         // GET: api/Users
-        [HttpGet("GetAllUsers")]
+        [HttpGet]
         public async Task<ActionResult<ResponseDTO>> GetUsers()
         {
             var response = new ResponseDTO()
@@ -53,7 +53,7 @@ namespace UserApi.Controllers
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("UpdateUser")]
+        [HttpPut]
         public async Task<ActionResult<ResponseDTO>> PutUser(User user)
         {
             var response = new ResponseDTO()
@@ -67,7 +67,7 @@ namespace UserApi.Controllers
 
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("RegisterUser")]
+        [HttpPost]
         public async Task<ActionResult<ResponseDTO>> PostUser(RegistrationRequestDTO registrationRequestDTO)
         {
             var response = new ResponseDTO()

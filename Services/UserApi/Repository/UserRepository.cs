@@ -15,75 +15,115 @@ namespace UserApi.Repository
 
         public async Task<bool> DeleteUser(int id)
         {
-            var user = await _dbContext.Users.FindAsync(id);
-            if (user == null)
+            try
             {
-                return false;
+                var user = await _dbContext.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return false;
+                }
+                _dbContext.Users.Remove(user);
+                await _dbContext.SaveChangesAsync();
+                return true;
             }
-            _dbContext.Users.Remove(user);
-           await _dbContext.SaveChangesAsync();
-            return true;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<IEnumerable<UserDTO>> GetAllUsers()
         {
-            var users = await _dbContext.Users.Select(x =>
-                new UserDTO
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    UserName = x.UserName,
-                    Address = x.Address,
-                    Email = x.Email,
-                    Phone = x.Phone,
-                    ProfilePic = x.ProfilePic,
-                }).ToListAsync();
-            return users;
+            try
+            {
+                var users = await _dbContext.Users.Select(x =>
+                        new UserDTO
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            UserName = x.UserName,
+                            Address = x.Address,
+                            Email = x.Email,
+                            Phone = x.Phone,
+                            ProfilePic = x.ProfilePic,
+                        }).ToListAsync();
+                return users;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             
 
         }
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _dbContext.Users.FindAsync(id);
-            if (user == null)
+            try
             {
-                return new User();
+                var user = await _dbContext.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return new User();
+                }
+                return user;
             }
-            return user;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<bool> PostUser(RegistrationRequestDTO registrationRequestDTO)
         {
-            var user = new User()
+            try
             {
-                UserName = registrationRequestDTO.UserName,
-                Email = registrationRequestDTO.Email,
-                Phone = registrationRequestDTO.PhoneNo,
-                Name = registrationRequestDTO.Name,
-            };
-            _dbContext.Add(user);
-          var result =  await _dbContext.SaveChangesAsync();
-            return result > 0;
+                var user = new User()
+                {
+                    UserName = registrationRequestDTO.UserName,
+                    Email = registrationRequestDTO.Email,
+                    Phone = registrationRequestDTO.PhoneNo,
+                    Name = registrationRequestDTO.Name,
+                };
+                _dbContext.Add(user);
+                var result = await _dbContext.SaveChangesAsync();
+                return result > 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
 
         }
 
         public async Task<User> PutUser(User updatedUser)
         {
-           var user = await GetUser(updatedUser.Id);
-            if (user == null)
+            try
             {
-                return new User();
+                var user = await GetUser(updatedUser.Id);
+                if (user == null)
+                {
+                    return new User();
+                }
+
+                user.Address = updatedUser.Address;
+                user.Gender = updatedUser.Gender;
+                user.ProfilePic = updatedUser.ProfilePic;
+                user.DOB = updatedUser.DOB;
+
+                await _dbContext.SaveChangesAsync();
+                return user;
             }
+            catch (Exception)
+            {
 
-            user.Address = updatedUser.Address;
-            user.Gender = updatedUser.Gender;
-            user.ProfilePic = updatedUser.ProfilePic;
-            user.DOB = updatedUser.DOB;
-
-            await _dbContext.SaveChangesAsync();
-            return user;
+                throw;
+            }
 
         }
     }
