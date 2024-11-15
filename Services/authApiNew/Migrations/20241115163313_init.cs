@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace BookingApi.Migrations
+namespace authApiNew.Migrations
 {
     /// <inheritdoc />
-    public partial class second : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

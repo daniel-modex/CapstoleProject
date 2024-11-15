@@ -12,7 +12,7 @@ using UserApi.Data;
 namespace UserApi.Migrations
 {
     [DbContext(typeof(UserDBContext))]
-    [Migration("20241115091355_new")]
+    [Migration("20241115162517_new")]
     partial class @new
     {
         /// <inheritdoc />
@@ -36,6 +36,9 @@ namespace UserApi.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateOnly>("DOB")
                         .HasColumnType("date");
 
@@ -53,9 +56,6 @@ namespace UserApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePic")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")

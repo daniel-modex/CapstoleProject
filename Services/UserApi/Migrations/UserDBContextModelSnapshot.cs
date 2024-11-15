@@ -33,6 +33,9 @@ namespace UserApi.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateOnly>("DOB")
                         .HasColumnType("date");
 
@@ -50,9 +53,6 @@ namespace UserApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePic")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")

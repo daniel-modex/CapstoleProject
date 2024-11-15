@@ -1,5 +1,6 @@
 ﻿using authApiNew.models;
 using authApiNew.Services;
+using CommonLibrary;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +20,13 @@ namespace authApiNew.Controllers
 
 
         [HttpPost("Register")]
-        public async Task<ActionResult> Register(RegisterRequestDto register)
+        public async Task<ActionResult<ResponseDTO>> Register(RegisterRequestDto register)
         {
-            var result = await _registerService.RegisterUser(register);
+            var result = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _registerService.RegisterUser(register),
+            };
             return Ok(result);
         }
 

@@ -33,6 +33,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationApi", "Services\NotificationApi\NotificationApi.csproj", "{8C148316-A4DD-4AAD-80BD-C55EC0398144}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "authApiNew", "Services\authApiNew\authApiNew.csproj", "{7D9E9D51-8161-4AF8-9351-86DBED77797E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D15F5BB6-4B31-41B2-8840-9D43669501B0} = {D15F5BB6-4B31-41B2-8840-9D43669501B0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

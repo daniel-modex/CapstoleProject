@@ -61,6 +61,9 @@ namespace ProfessionalsApi.Migrations
                     b.Property<decimal>("BasePay")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("CummilativeRating")
                         .HasColumnType("decimal(18,2)");
 

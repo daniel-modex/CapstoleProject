@@ -9,6 +9,8 @@
         public string? ProfilePic { get; set; } = string.Empty;
         public decimal BasePay { get; set; }
         public string? DocumentPath { get; set; }
+        public string? Domain { get; set; }
+        public string? City { get; set; }
 
 
     }

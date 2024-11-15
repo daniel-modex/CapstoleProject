@@ -85,7 +85,7 @@ namespace UserApi.Repository
                 {
                     UserName = registrationRequestDTO.UserName,
                     Email = registrationRequestDTO.Email,
-                    Phone = registrationRequestDTO.PhoneNo,
+                    Phone = registrationRequestDTO.Phone,
                     Name = registrationRequestDTO.Name,
                 };
                 _dbContext.Add(user);
@@ -115,6 +115,7 @@ namespace UserApi.Repository
                 user.Gender = updatedUser.Gender;
                 user.ProfilePic = updatedUser.ProfilePic;
                 user.DOB = updatedUser.DOB;
+                user.City = updatedUser.City;
 
                 await _dbContext.SaveChangesAsync();
                 return user;

@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace BookingApi.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,10 +20,15 @@ namespace BookingApi.Migrations
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProfessionalName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BookingStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookingRequestedSuccessfully = table.Column<bool>(type: "bit", nullable: false),
+                    ServiceProviderResponse = table.Column<bool>(type: "bit", nullable: false),
                     IsCompleted = table.Column<bool>(type: "bit", nullable: false),
                     ServiceProvided = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ServiceDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PaymetSuccessful = table.Column<bool>(type: "bit", nullable: false),
+                    CancelationConfirmed = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,7 +45,8 @@ namespace BookingApi.Migrations
                     ServiceResponse = table.Column<bool>(type: "bit", nullable: false),
                     ServiceMessage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     paymentResponse = table.Column<bool>(type: "bit", nullable: false),
-                    PaymentMessage = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PaymentMessage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CancallationResponse = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

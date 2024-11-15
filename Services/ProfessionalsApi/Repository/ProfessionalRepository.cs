@@ -73,6 +73,16 @@ namespace ProfessionalsApi.Repository
             return pro;
         }
 
+        public async Task<Professionals> GetProfessionalByUserName(string userName)
+        {
+            var pro = await _context.Professionals.FirstOrDefaultAsync(x=>x.UserName==userName);
+            if (pro == null)
+            {
+                return new Professionals();
+            }
+            return pro;
+        }
+
         public async Task<IEnumerable<Professionals>> GetProfessionalsByDomain(string domain)
         {
             return await _context.Professionals.Where(x=>x.Domain==domain).ToListAsync();
@@ -84,10 +94,10 @@ namespace ProfessionalsApi.Repository
             {
                 UserName = registrationRequestDTO.UserName,
                 Email = registrationRequestDTO.Email,
-                Phone = registrationRequestDTO.PhoneNo,
+                Phone = registrationRequestDTO.Phone,
                 Name = registrationRequestDTO.Name,
                 
-                Domain = registrationRequestDTO.Domain,
+                
             };
             _context.Professionals.Add(pro);
             var result = await _context.SaveChangesAsync();
@@ -101,6 +111,8 @@ namespace ProfessionalsApi.Repository
             {
                 return new Professionals();
             }
+            pro.Domain = updateProfile.Domain;
+            pro.City = updateProfile.City;
             pro.Address = updateProfile.Address;
             pro.Gender = updateProfile.Gender;
             pro.ProfilePic = updateProfile.ProfilePic;

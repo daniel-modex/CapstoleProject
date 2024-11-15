@@ -26,6 +26,7 @@ namespace authApiNew.Services
                 Role = requestDto.Role,
                 PhoneNumber = requestDto.Phone,
                 UserName = requestDto.UserName,
+                Name = requestDto.Name,
             };
             var result = await _userManager.CreateAsync(user,requestDto.Password);
             if (result.Succeeded)

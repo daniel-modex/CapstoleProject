@@ -12,8 +12,8 @@ using ProfessionalsApi.Data;
 namespace ProfessionalsApi.Migrations
 {
     [DbContext(typeof(ProfessionalApiContext))]
-    [Migration("20241111111124_new")]
-    partial class @new
+    [Migration("20241115190424_new1")]
+    partial class new1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,6 +64,12 @@ namespace ProfessionalsApi.Migrations
                     b.Property<decimal>("BasePay")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("CummilativeRating")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateOnly>("DOB")
                         .HasColumnType("date");
 
@@ -96,6 +102,9 @@ namespace ProfessionalsApi.Migrations
 
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TotalReviews")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");

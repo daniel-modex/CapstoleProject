@@ -12,8 +12,8 @@ using ProfessionalsApi.Data;
 namespace ProfessionalsApi.Migrations
 {
     [DbContext(typeof(ProfessionalApiContext))]
-    [Migration("20241111034026_initial")]
-    partial class initial
+    [Migration("20241115162814_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,9 @@ namespace ProfessionalsApi.Migrations
 
                     b.Property<string>("DomainName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ProfessionalId")
                         .HasColumnType("int");
@@ -58,11 +61,20 @@ namespace ProfessionalsApi.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BasePay")
+                    b.Property<decimal>("BasePay")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("CummilativeRating")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateOnly>("DOB")
                         .HasColumnType("date");
+
+                    b.Property<string>("DocumentPath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Domain")
                         .HasColumnType("nvarchar(max)");
@@ -90,6 +102,9 @@ namespace ProfessionalsApi.Migrations
 
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TotalReviews")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");

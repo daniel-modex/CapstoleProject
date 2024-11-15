@@ -56,6 +56,25 @@ namespace ProfessionalsApi.Controllers
             return Ok(response);
         }
 
+        [HttpGet("GetProfessionalByUserName/{userName}")]
+        public async Task<ActionResult<ResponseDTO>> GetProfessionalsByUserName(string userName)
+        {
+            var professionals = await _professionalRepository.GetProfessionalByUserName(userName);
+
+            if (professionals == null)
+            {
+                return NotFound();
+            }
+
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = professionals,
+            };
+
+            return Ok(response);
+        }
+
         [HttpGet("GetProfessionalsByDomain/{domain}")]
         public async Task<ActionResult<ResponseDTO>> GetProfessionalsByDomain(string domain)
         {

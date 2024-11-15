@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProfessionalsApi.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,8 @@ namespace ProfessionalsApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DomainName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfessionalName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProfessionalId = table.Column<int>(type: "int", nullable: false)
+                    ProfessionalId = table.Column<int>(type: "int", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,14 +38,18 @@ namespace ProfessionalsApi.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DOB = table.Column<DateOnly>(type: "date", nullable: false),
                     ProfilePic = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    BasePay = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BasePay = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    Domain = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Domain = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DocumentPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CummilativeRating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalReviews = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

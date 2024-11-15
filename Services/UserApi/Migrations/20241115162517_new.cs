@@ -25,7 +25,7 @@ namespace UserApi.Migrations
                     DOB = table.Column<DateOnly>(type: "date", nullable: false),
                     ProfilePic = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

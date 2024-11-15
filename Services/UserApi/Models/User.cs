@@ -14,7 +14,7 @@ namespace UserApi.Models
         public DateOnly DOB { get; set; } 
         public string? ProfilePic { get; set; } = string.Empty;
         public string? UserName { get; set; }
-        public string? Role { get; set; } = string.Empty ;  
+        public string? City { get; set; } = string.Empty ;  
 
 
 
