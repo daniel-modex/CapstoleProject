@@ -11,6 +11,7 @@ namespace UserApi.Repository.IRepository
         Task<User> PutUser(User updateUser);
         Task<bool> PostUser(RegistrationRequestDTO registrationRequestDTO);
         Task<bool> DeleteUser(int id);
+        Task<User> GetUserByUserName(string userName);
 
 
 

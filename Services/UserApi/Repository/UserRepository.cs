@@ -77,6 +77,24 @@ namespace UserApi.Repository
             }
         }
 
+        public async Task<User> GetUserByUserName(string userName)
+        {
+            try
+            {
+                var user = await _dbContext.Users.FirstOrDefaultAsync(x=>x.UserName==userName);
+                if (user == null)
+                {
+                    return new User();
+                }
+                return user;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<bool> PostUser(RegistrationRequestDTO registrationRequestDTO)
         {
             try

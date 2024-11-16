@@ -51,6 +51,19 @@ namespace UserApi.Controllers
             return Ok(response);
         }
 
+        [HttpGet("ByUserName/{userName}")]
+        public async Task<ActionResult<ResponseDTO>> GetUserByUserName(string userName)
+        {
+
+            var response = new ResponseDTO()
+            {
+                IsSuccessful = true,
+                Result = await _userRepository.GetUserByUserName(userName),
+            };
+
+            return Ok(response);
+        }
+
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]

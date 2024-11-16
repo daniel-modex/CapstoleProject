@@ -17,7 +17,7 @@ namespace BookingApi.Controllers
             _summaryRepository = summaryRepository;
         }
 
-        [HttpGet("ProfessionalSummary")]
+        [HttpGet("ProfessionalSummary/{pname}")]
         public async Task<ActionResult<ResponseDTO>> GetProfessionalSummary(string pname)
         {
             var response = new ResponseDTO()
@@ -29,7 +29,7 @@ namespace BookingApi.Controllers
             return Ok(response);
         }
 
-        [HttpGet("ServiceSummary")]
+        [HttpGet("ServiceSummary/{sname}")]
         public async Task<ActionResult<ResponseDTO>> GetServiceSummary(string sname)
         {
             var response = new ResponseDTO()

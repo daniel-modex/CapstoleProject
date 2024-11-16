@@ -12,8 +12,8 @@ using ProfessionalsApi.Data;
 namespace ProfessionalsApi.Migrations
 {
     [DbContext(typeof(ProfessionalApiContext))]
-    [Migration("20241115162814_init")]
-    partial class init
+    [Migration("20241116040236_new")]
+    partial class @new
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
